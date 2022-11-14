@@ -1,0 +1,22 @@
+{
+  "name": "rjutils",
+  "version": "1.0.0",
+  "description": "Easy and Lightweight Utilities",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rotvproHD/NPM_UTILS.git"
+  },
+  "keywords": [
+    "easy",
+    "utilities",
+    "file",
+    "sync"
+  ],
+  "author": "0x4096 (Robert Jansen)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rotvproHD/NPM_UTILS/issues"
+  },
+  "homepage": "https://github.com/rotvproHD/NPM_UTILS#readme"
+}
