@@ -36,6 +36,15 @@ module.exports = {
     },
 
     /**
+    * Generate a Random Boolean
+    *
+    */
+    randomBol() {
+        const boolean = Math.floor(Math.random() * (2 - 1 + 1)) + 1
+        return (boolean === 1)
+    },
+
+    /**
     * Generate a Random String
     *
     * @typedef {Object} randomStr { pages: Object, events: Object, urls: RouteList, bind: String, cors: Boolean, port: Number, body: Number }

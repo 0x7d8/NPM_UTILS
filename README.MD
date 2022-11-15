@@ -10,7 +10,7 @@
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
 
-  Easy and Lightweight Utilitiees
+  Easy and Lightweight Utilities
 </center>
 
 ### 🏠 [Homepage](https://github.com/rotvproHD/NPM_UTILS#readme)
@@ -38,6 +38,13 @@ const utils = require('rjutils-collection')
 const min = 50
 const max = 100
 const number = utils.randomNum(min, max)
+```
+
+Generating a Random Boolean
+```js
+const utils = require('rjutils-collection')
+
+const boolean = utils.randomBol()
 ```
 
 Generating a Random String
