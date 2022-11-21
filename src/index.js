@@ -37,7 +37,6 @@ module.exports = {
 
     /**
     * Generate a Random Boolean
-    *
     */
     randomBol() {
         const boolean = Math.floor(Math.random() * (2 - 1 + 1)) + 1
@@ -62,5 +61,25 @@ module.exports = {
 
         const string = require('./utils/randomString').generate(options)
         return string
+    },
+
+    /**
+    * Generate a Spinner
+    */
+    spinner: class spinner {
+        constructor() {
+            this.state = 0
+            this.states = [
+                '/', '-',
+                '\\', '|'
+            ]
+        }
+
+        get() {
+            if (this.state >= 4) this.state = 0
+            this.state++
+
+            return this.states[this.state-1]
+        }
     }
 }
