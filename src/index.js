@@ -117,5 +117,22 @@ module.exports = {
 
 		const data = require('./utils/cryptString').decrypt(options)
 		return data
-	}
+	},
+
+	/**
+	* Hash a String
+	*
+	* @typedef {Object} decryptStr { algorithm: string, key: string, key: string }
+	* @prop {String} [algorithm] The Algorithm to use
+	* @prop {String} [digest] The Text Output (base64, base64url, binary, hex)
+	* @prop {String} text The Text to Hash
+	* 
+	* @param {decryptStr} options
+	*/
+	hashString(options) {
+		if (typeof options !== 'object') throw new TypeError('options must be an object')
+
+		const data = require('./utils/cryptString').hash(options)
+		return data
+	},
 }
