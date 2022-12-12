@@ -31,7 +31,9 @@ module.exports.hash = (options) => {
 	const algorithm = options.algorithm || 'sha512'
 	const digest = options.digest || 'hex'
 
-	const hash = crypto.createHash(algorithm).update(String(options.text)).digest(digest).substring(0, 32)
+	let hash
+	if (digest === 'bytes') hash = crypto.createHash(algorithm).update(String(options.text))
+	else hash = crypto.createHash(algorithm).update(String(options.text)).digest(digest)
 
 	return hash
 }

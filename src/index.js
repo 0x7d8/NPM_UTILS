@@ -124,7 +124,7 @@ module.exports = {
 	*
 	* @typedef {Object} decryptStr { algorithm: string, key: string, key: string }
 	* @prop {String} [algorithm] The Algorithm to use
-	* @prop {String} [digest] The Text Output (base64, base64url, binary, hex)
+	* @prop {String} [digest] The Text Output (base64, base64url, binary, hex, bytes)
 	* @prop {String} text The Text to Hash
 	* 
 	* @param {decryptStr} options

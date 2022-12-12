@@ -21,6 +21,12 @@
 npm i rjutils-collection
 ```
 
+or
+
+```sh
+yarn add rjutils-collection
+```
+
 ## Usage
 
 Loading an env File as json
@@ -57,6 +63,41 @@ const string = utils.randomStr({
   symbols: true,
   uppercase: true,
   lowercase: true
+})
+```
+
+Encrypting a String
+```js
+const utils = require('rjutils-collection')
+
+const result = utils.encryptString({
+  text: 'Hello, World!',
+  algorithm: 'sha256',
+  key: '123456789',
+  output: 'hex'
+})
+```
+
+Decrypting a String
+```js
+const utils = require('rjutils-collection')
+
+const result = utils.decryptString({
+  text: 'cf5ca2c244e71e33e30d07d5c13a4502!',
+  algorithm: 'sha256',
+  key: '123456789',
+  output: 'utf8'
+})
+```
+
+Hashing a String
+```js
+const utils = require('rjutils-collection')
+
+const result = utils.hashString({
+  text: 'Hello World again!',
+  algorithm: 'sha256',
+  digest: 'hex'
 })
 ```
 
