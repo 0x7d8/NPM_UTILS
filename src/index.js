@@ -26,12 +26,15 @@ module.exports = {
 	*
 	* @param {Number} min The Minimum Number
 	* @param {Number} max The Maximum Number
+	* @param {Number} [dec] The Decimal Places to Generate
 	*/
-	randomNum(min, max) {
+	randomNum(min, max, dec) {
 		if (typeof min !== 'number') throw new TypeError('minimum must be a number')
 		if (typeof max !== 'number') throw new TypeError('maximum must be a number')
+		dec = dec || 0
 
-		const number = Math.floor(Math.random() * (max - min + 1)) + min
+		const random = Math.random() * (max - min + 1) + min
+		const number = Math.floor(random * (10 ** dec)) / (10 ** dec);
 		return number
 	},
 
