@@ -1,22 +1,25 @@
 {
   "name": "rjutils-collection",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Easy and Lightweight Utilities",
-  "main": "src/index.js",
-  "repository": {
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -r lib && tsc --pretty false"
+  }, "repository": {
     "type": "git",
     "url": "git+https://github.com/rotvproHD/NPM_UTILS.git"
-  },
-  "keywords": [
+  }, "keywords": [
     "easy",
     "utilities",
     "file",
     "sync"
-  ],
-  "author": "0x4096 (Robert Jansen)",
+  ], "author": "0x4096 (Robert Jansen)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rotvproHD/NPM_UTILS/issues"
-  },
-  "homepage": "https://github.com/rotvproHD/NPM_UTILS#readme"
+  }, "homepage": "https://github.com/rotvproHD/NPM_UTILS#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  }
 }

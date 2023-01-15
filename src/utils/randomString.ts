@@ -1,14 +1,14 @@
-const crypto = require('crypto')
+import * as crypto from "crypto"
 
-const RANDOM_BATCH_SIZE = 256
+import randomStrOptions from "../interfaces/randomStrOptions"
 
-let randomIndex
-let randomBytes
+let randomIndex: number
+let randomBytes: Buffer
 
-const getNextRandomValue = function() {
+const getNextRandomValue = () => {
 	if (randomIndex === undefined || randomIndex >= randomBytes.length) {
 		randomIndex = 0
-		randomBytes = crypto.randomBytes(RANDOM_BATCH_SIZE)
+		randomBytes = crypto.randomBytes(256)
 	}
 
 	const result = randomBytes[randomIndex]
@@ -17,7 +17,7 @@ const getNextRandomValue = function() {
 	return result
 }
 
-const randomNumber = (max) => {
+const randomNumber = (max: number) => {
 	let rand = getNextRandomValue()
 	while (rand >= 256 - (256 % max)) rand = getNextRandomValue()
 
@@ -28,9 +28,8 @@ const lowercase = 'abcdefghijklmnopqrstuvwxyz'
 const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const numbers = '0123456789'
 const symbols = '!@#$%^&*()+_-=}{[]|:;"/?.><,`~'
-const similarCharacters = /[ilLI|`oO0]/g
 
-const generate = (options, pool) => {
+const generate = (options: randomStrOptions, pool: string) => {
 	const optionsLength = options.length
 	const poolLength = pool.length
 	let password = ''
@@ -40,7 +39,7 @@ const generate = (options, pool) => {
 	return password
 }
 
-module.exports.generate = (options) => {
+module.exports.generate = (options: randomStrOptions) => {
 	options = options || {}
 
 	if (!('length' in options)) options.length = 10
@@ -49,7 +48,6 @@ module.exports.generate = (options) => {
 	if (!('uppercase' in options)) options.uppercase = true
 	if (!('lowercase' in options)) options.lowercase = true
 	if (!('exclude' in options)) options.exclude = ''
-	options.excludeSimilarCharacters = false
 
 	let pool = ''
 	if (options.lowercase) pool += lowercase
@@ -62,8 +60,6 @@ module.exports.generate = (options) => {
 
 	if (!pool) {
 		throw new TypeError('At least one rule must be true')
-	}; if (options.excludeSimilarCharacters) {
-		pool = pool.replace(similarCharacters, '')
 	}; let i = options.exclude.length
 	while (i--) {
 		pool = pool.replace(options.exclude[i], '')
