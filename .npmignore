@@ -1,2 +1,12 @@
 # TESTING
 test/
+
+# SOURCE
+src/index.ts
+src/utils/
+
+# OTHER
+examples/
+.github/
+pnpm-lock.yaml
+tsconfig.json

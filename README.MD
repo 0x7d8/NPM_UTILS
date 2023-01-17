@@ -115,5 +115,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2022 [0x4096](https://github.com/rotvproHD).<br />
+Copyright © 2023 [0x4096](https://github.com/rotvproHD).<br />
 This project is MIT licensed.

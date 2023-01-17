@@ -1,6 +1,8 @@
 import * as path from "path"
 import * as fs from "fs"
 
+import { Hash } from "crypto"
+
 import randomStrOptions from "./interfaces/randomStrOptions"
 import encryptStrOptions from "./interfaces/encryptStrOptions"
 import decryptStrOptions from "./interfaces/decryptStrOptions"
@@ -15,12 +17,12 @@ export = {
 
 		const content = fs.readFileSync(path.resolve(filePath), 'utf8')
 
-		let returns = {}
+		let returns: { [key: string]: string } = {}
 		for (const line of content.split('\n')) {
 			const keys = line.split(/(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg)
 			returns[keys[1]] = keys[2]
 		}
-		
+
 		return returns
 	},
 
@@ -58,7 +60,7 @@ export = {
 		const lowercase = options.lowercase ?? true
 		const exclude = options.exclude ?? ''
 
-		const string = require('./utils/randomString').generate({
+		const string: string = require('./utils/randomString').generate({
 			length, numbers, symbols, uppercase, lowercase, exclude
 		}); return string
 	},
@@ -68,16 +70,20 @@ export = {
 		states: string[]
 		state: number
 
-		constructor() {
+		/** Create Spinner */
+		constructor(
+			/** The States */ states?: string[],
+		) {
 			this.state = 0
-			this.states = [
+			this.states = states ?? [
 				'/', '-',
 				'\\', '|'
 			]
 		}
 
+		/** Get the Current State */
 		get() {
-			if (this.state >= 4) this.state = 0
+			if (this.state >= this.states.length) this.state = 0
 			this.state++
 
 			return this.states[this.state - 1]
@@ -92,7 +98,7 @@ export = {
 		const output = options.output ?? 'hex'
 		const key = options.key ?? '123unsafe'
 
-		const data = require('./utils/cryptString').encrypt({
+		const data: string = require('./utils/cryptString').encrypt({
 			text, algorithm, output, key
 		}); return data
 	},
@@ -105,7 +111,7 @@ export = {
 		const output = options.output ?? 'utf8'
 		const key = options.key ?? '123unsafe'
 
-		const data = require('./utils/cryptString').decrypt({
+		const data: string = require('./utils/cryptString').decrypt({
 			text, algorithm, output, key
 		}); return data
 	},
@@ -117,7 +123,7 @@ export = {
 		const algorithm = options.algorithm ?? 'sha256'
 		const output = options.output ?? 'hex'
 
-		const data = require('./utils/cryptString').hash({
+		const data: string | Hash = require('./utils/cryptString').hash({
 			text, algorithm, output
 		}); return data
 	},

@@ -14,4 +14,3 @@ export default interface decryptStrOptions {
      * @default '123unsafe'
     */ key?: string;
 }
-//# sourceMappingURL=decryptStrOptions.d.ts.map

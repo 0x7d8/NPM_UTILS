@@ -11,4 +11,3 @@ export default interface hashStrOptions {
      * @default 'hex'
     */ output?: BinaryToTextEncoding | 'bytes';
 }
-//# sourceMappingURL=hashStrOptions.d.ts.map
