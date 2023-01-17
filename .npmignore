@@ -2,8 +2,7 @@
 test/
 
 # SOURCE
-src/index.ts
-src/utils/
+src/
 
 # OTHER
 examples/
