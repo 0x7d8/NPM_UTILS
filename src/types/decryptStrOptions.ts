@@ -2,14 +2,14 @@ export default interface decryptStrOptions {
   /** The Text to decrypt */ text: string
   /**
    * The Algorithm to use
-   * @default 'aes-256-cbc'
+   * @default "aes-256-cbc"
   */ algorithm?: string
   /**
    * The Text Output
-   * @default 'hex'
+   * @default "hex"
   */ output?: BufferEncoding
   /**
    * The Key to decrypt with
-   * @default '123unsafe'
+   * @default "123unsafe"
   */ key?: string
 }

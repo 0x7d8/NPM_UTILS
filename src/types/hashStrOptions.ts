@@ -4,10 +4,10 @@ export default interface hashStrOptions {
   /** The Text to Hash */ text: string
   /**
    * The Algorithm to use
-   * @default 'sha256'
+   * @default "sha256"
   */ algorithm?: 'sha256' | 'sha512' | string
   /**
    * The Text Output
-   * @default 'hex'
+   * @default "hex"
   */ output?: BinaryToTextEncoding | 'bytes'
 }

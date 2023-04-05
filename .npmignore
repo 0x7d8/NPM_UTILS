@@ -1,11 +1,8 @@
-# TESTING
 test/
-
-# SOURCE
 src/
-
-# OTHER
 examples/
 .github/
-pnpm-lock.yaml
+.editorconfig
+yarn.lock
 tsconfig.json
+CHANGELOG.MD

@@ -1,6 +1,6 @@
 import * as crypto from "crypto"
 
-import randomStrOptions from "../interfaces/randomStrOptions"
+import randomStrOptions from "../types/randomStrOptions"
 
 let randomIndex: number
 let randomBytes: Buffer
@@ -30,7 +30,7 @@ const numbers = '0123456789'
 const symbols = '!@#$%^&*()+_-=}{[]|:;"/?.><,`~'
 
 const generate = (options: randomStrOptions, pool: string) => {
-	const optionsLength = options.length
+	const optionsLength = options.length ?? 12
 	const poolLength = pool.length
 	let password = ''
 
@@ -39,7 +39,7 @@ const generate = (options: randomStrOptions, pool: string) => {
 	return password
 }
 
-module.exports.generate = (options: randomStrOptions) => {
+export const password = (options: randomStrOptions) => {
 	options = options || {}
 
 	if (!('length' in options)) options.length = 10
@@ -60,9 +60,9 @@ module.exports.generate = (options: randomStrOptions) => {
 
 	if (!pool) {
 		throw new TypeError('At least one rule must be true')
-	}; let i = options.exclude.length
+	}; let i = options.exclude?.length ?? 0
 	while (i--) {
-		pool = pool.replace(options.exclude[i], '')
+		pool = pool.replace(options.exclude![i], '')
 	}
 
 	const password = generate(options, pool)

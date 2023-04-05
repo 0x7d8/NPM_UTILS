@@ -21,6 +21,6 @@ export default interface randomStrOptions {
   */ lowercase?: boolean
   /**
    * Letters / Symbols that shouldnt be included
-   * @default ''
+   * @default ""
   */ exclude?: string
 }

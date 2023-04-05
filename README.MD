@@ -18,20 +18,21 @@
 ## Install
 
 ```sh
+# NPM
 npm i rjutils-collection
-```
 
-or
-
-```sh
+# Yarn
 yarn add rjutils-collection
+
+# pNPM
+pnpm add rjutils-collection
 ```
 
 ## Usage
 
-Loading an env File as json
+Loading an env File as object
 ```js
-const path = require('node:path')
+const path = require('path')
 const utils = require('rjutils-collection')
 
 const env = utils.loadEnv(path.join(__dirname, '.env'))

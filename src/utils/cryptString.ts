@@ -1,25 +1,25 @@
 import * as crypto from "crypto"
 
-import encryptStrOptions from "../interfaces/encryptStrOptions"
-import decryptStrOptions from "../interfaces/decryptStrOptions"
-import hashStrOptions from "../interfaces/hashStrOptions"
+import encryptStrOptions from "../types/encryptStrOptions"
+import decryptStrOptions from "../types/decryptStrOptions"
+import hashStrOptions from "../types/hashStrOptions"
 
-module.exports.encrypt = (options: encryptStrOptions) => {
+export const encrypt = (options: encryptStrOptions) => {
 	const key = crypto.createHash('sha256').update(String(options.key)).digest('base64').substring(0, 32)
 	const iv = Buffer.alloc(16, 0)
 
-	const enCipher = crypto.createCipheriv(options.algorithm, key, iv)
+	const enCipher = crypto.createCipheriv(options.algorithm as any, key, iv)
 	let encryptedData = enCipher.update(options.text)
 	encryptedData = Buffer.concat([encryptedData, enCipher.final()])
 
 	return encryptedData.toString(options.output)
 }
 
-module.exports.decrypt = (options: decryptStrOptions) => {
+export const decrypt = (options: decryptStrOptions) => {
 	const key = crypto.createHash('sha256').update(String(options.key)).digest('base64').substring(0, 32)
 	const iv = Buffer.alloc(16, 0)
 
-	const deCipher = crypto.createDecipheriv(options.algorithm, key, iv)
+	const deCipher = crypto.createDecipheriv(options.algorithm as any, key, iv)
 
 	let decryptedData = deCipher.update(Buffer.from(options.text, 'hex'))
 	decryptedData = Buffer.concat([decryptedData, deCipher.final()])
@@ -27,10 +27,10 @@ module.exports.decrypt = (options: decryptStrOptions) => {
 	return decryptedData.toString(options.output)
 }
 
-module.exports.hash = (options: hashStrOptions) => {
+export const hash = (options: hashStrOptions) => {
 	let hash: string | crypto.Hash
-	if (options.output === 'bytes') hash = crypto.createHash(options.algorithm).update(String(options.text))
-	else hash = crypto.createHash(options.algorithm).update(String(options.text)).digest(options.output)
+	if (options.output === 'bytes') hash = crypto.createHash(options.algorithm as any).update(String(options.text))
+	else hash = crypto.createHash(options.algorithm as any).update(String(options.text)).digest(options.output as any)
 
 	return hash
 }
