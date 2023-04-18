@@ -198,7 +198,7 @@ export {
 
 /**
  * Deep Parse Options
- * @since 1.2.2
+ * @since 1.3.0
 */ export function deepParseOptions<Options extends Record<any, any>>(object: DeepRequired<Options>, provided: Partial<Options>): DeepRequired<Options> {
 	const handleObject = (object: Record<string, any>, merge: Record<string, any>) => {
 		let output: Record<string, any> = {}
