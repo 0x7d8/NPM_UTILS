@@ -15,6 +15,22 @@ import * as cryptString from "./utils/cryptString"
 import { version } from "./pckg.json"
 export const Version: string = version
 
+export type DeepRequired<Type> = Type extends {}
+		? Type extends Map<any, any>
+			? Required<Type>
+		: Type extends Set<any>
+			? Required<Type> 
+		: Type extends Buffer
+			? Required<Type>
+		: Type extends Function
+			? Required<Type>
+		: Type extends Array<any>
+			? Required<Type>
+		: Type extends {}
+			? { [Key in keyof Type]-?: DeepRequired<Type[Key]> }
+		: Required<Type>
+	: Required<Type>
+
 export {
 	randomStrOptions,
 	encryptStrOptions,
@@ -178,4 +194,23 @@ export {
 	})
 
 	return data as any
+}
+
+/**
+ * Deep Parse Options
+ * @since 1.2.2
+*/ export function deepParseOptions<Options extends Record<any, any>>(object: DeepRequired<Options>, provided: Partial<Options>): DeepRequired<Options> {
+	const handleObject = (object: Record<string, any>, merge: Record<string, any>) => {
+		let output: Record<string, any> = {}
+		Object.keys(object).forEach((key) => {
+			if (typeof object[key] === 'object' && key in merge) output[key] = handleObject(object[key], merge[key])
+			else if (typeof object[key] === 'object') output[key] = object[key]
+			else if (key in merge) output[key] = merge[key]
+			else output[key] = object[key]
+		})
+
+		return output
+	}
+
+	return handleObject(object, provided) as any
 }

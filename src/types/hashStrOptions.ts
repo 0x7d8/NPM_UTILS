@@ -5,7 +5,7 @@ export default interface hashStrOptions {
   /**
    * The Algorithm to use
    * @default "sha256"
-  */ algorithm?: 'sha256' | 'sha512' | string
+  */ algorithm?: string
   /**
    * The Text Output
    * @default "hex"

@@ -102,6 +102,47 @@ const result = utils.hashString({
 })
 ```
 
+Parsing Options
+```js
+const utils = require('rjutils-collection')
+
+const original = {
+  ssl: true,
+  maxRequests: 10000,
+  other: {
+    clock: true,
+    date: {
+      enabled: true,
+      timezone: 'UTC'
+    }
+  }
+}
+
+const userProvided = {
+  ssl: false,
+  other: {
+    date: {
+      timezone: 'CET'
+    }
+  }
+}
+
+const result = utils.deepParseOptions(original, userProvided)
+/**
+ * {
+ *   ssl: false,
+ *   maxRequests: 10000,
+ *   other: {
+ *     clock: true,
+ *     date: {
+ *       enabled: true,
+ *       timezone: 'CET'
+ *     }
+ *   }
+ * }
+*/
+```
+
 ## Author
 
 👤 **0x4096**
