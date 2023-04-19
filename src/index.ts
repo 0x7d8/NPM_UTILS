@@ -42,10 +42,10 @@ export {
 /**
  * Load an Env File as Object
  * @since 1.0.0
-*/ export function loadEnv<F extends string, A extends boolean | undefined>(
-	/** The path to the Env file */ file: F,
-	/** Whether to load the File Async */ isAsync?: A
-): A extends true ? Promise<Record<string, string>> : Record<string, string> {
+*/ export function loadEnv<File extends string, Async extends boolean | undefined>(
+	/** The path to the Env file */ file: File,
+	/** Whether to load the File Async */ isAsync?: Async
+): Async extends true ? Promise<Record<string, string>> : Record<string, string> {
 	if (typeof file !== 'string') throw new TypeError('filePath must be a string')
 	const resolvedFile = path.resolve(file)
 
@@ -199,7 +199,10 @@ export {
 /**
  * Deep Parse Options
  * @since 1.3.0
-*/ export function deepParseOptions<Options extends Record<any, any>>(object: DeepRequired<Options>, provided: Partial<Options>): DeepRequired<Options> {
+*/ export function deepParseOptions<Options extends Record<any, any>>(
+	/** The Full Options Object */ object: DeepRequired<Options>,
+	/** The Options Object to merge with */ provided: Partial<Options>
+): DeepRequired<Options> {
 	const handleObject = (object: Record<string, any>, merge: Record<string, any>) => {
 		let output: Record<string, any> = {}
 		Object.keys(object).forEach((key) => {
@@ -213,4 +216,70 @@ export {
 	}
 
 	return handleObject(object, provided) as any
+}
+
+/**
+ * Deep Compare Objects
+ * @since 1.3.0
+*/ export function deepCompare<Object extends Record<any, any>, Compare extends Record<any, any>>(
+	/** The Object to compare against */ object: Object,
+	/** The Object to compare */ compare: Compare
+): compare is Object {
+	if (Object.is(object, compare)) return true
+
+	const handleObject = (object: Record<string, any>, compare: Record<string, any>) => {
+		Object.keys(object).forEach((key) => {
+			if (!compare[key]) throw false
+			if (typeof object[key] !== typeof compare[key]) throw false
+			if (typeof object[key] !== 'object' && object[key] !== compare[key]) throw false
+			if (typeof object[key] === 'object') handleObject(object[key], compare[key])
+		})
+
+		return true
+	}
+
+	try {
+		return handleObject(object, compare)
+	} catch {
+		return false
+	}
+}
+
+/**
+ * Get Files Recursively
+ * @since 1.4.0
+*/ export function getFilesRecursively<Directory extends string, Async extends boolean | undefined>(
+	/** The Directory to get Files from */ directory: Directory,
+	/** Whether to search the Directory Async */ async?: Async
+): Async extends true ? Promise<string[]> : string[] {
+	if (async) return new Promise(async(resolve, reject) => {
+		const handleDirectory = async(directory: string) => {
+			const output: string[] = []
+			for (const file of await fs.promises.readdir(directory, { withFileTypes: true })) {
+				if (file.isDirectory()) output.push(...(await handleDirectory(path.join(directory, file.name))))
+        else output.push(path.join(directory, file.name))
+			}
+
+			return output
+		}
+
+		try {
+			return resolve(await handleDirectory(directory))
+		} catch (error) {
+			return reject(error)
+		}
+	}) as any
+	else {
+		const handleDirectory = (directory: string) => {
+			const output: string[] = []
+			for (const file of fs.readdirSync(directory, { withFileTypes: true })) {
+				if (file.isDirectory()) output.push(...handleDirectory(path.join(directory, file.name)))
+				else output.push(path.join(directory, file.name))
+			}
+
+			return output
+		}
+
+		return handleDirectory(directory) as any
+	}
 }
