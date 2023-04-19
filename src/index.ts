@@ -42,12 +42,12 @@ export {
 /**
  * Load an Env File as Object
  * @since 1.0.0
-*/ export function loadEnv<F, A extends boolean | undefined>(
-	/** The path to the Env file */ file: string,
-	/** Whether to load the File Async */ isAsync: boolean
+*/ export function loadEnv<F extends string, A extends boolean | undefined>(
+	/** The path to the Env file */ file: F,
+	/** Whether to load the File Async */ isAsync?: A
 ): A extends true ? Promise<Record<string, string>> : Record<string, string> {
 	if (typeof file !== 'string') throw new TypeError('filePath must be a string')
-	file = path.resolve(file)
+	const resolvedFile = path.resolve(file)
 
 	const parseContent = (content: string) => {
 		let returns: Record<string, string> = {}
@@ -61,13 +61,13 @@ export {
 
 	if (isAsync) return new Promise(async(resolve, reject) => {
 		try {
-			const content = await fs.promises.readFile(file, 'utf8')
+			const content = await fs.promises.readFile(resolvedFile, 'utf8')
 			return resolve(parseContent(content))
 		} catch (err) {
 			return reject(err)
 		}
 	}) as any
-	else return parseContent(fs.readFileSync(file, 'utf8')) as any
+	else return parseContent(fs.readFileSync(resolvedFile, 'utf8')) as any
 }
 
 /**
