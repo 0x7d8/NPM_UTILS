@@ -206,9 +206,10 @@ export {
 	const handleObject = (object: Record<string, any>, merge: Record<string, any>) => {
 		let output: Record<string, any> = {}
 		Object.keys(object).forEach((key) => {
-			if (typeof object[key] === 'object' && key in merge) output[key] = handleObject(object[key], merge[key])
-			else if (typeof object[key] === 'object') output[key] = object[key]
-			else if (key in merge) output[key] = merge[key]
+			if (typeof object[key] === 'object' && !Array.isArray(merge[key]) && key in merge) output[key] = handleObject(object[key], merge[key])
+			else if (typeof object[key] === 'object' && !Array.isArray(merge[key])) output[key] = object[key]
+			else if (!Array.isArray(merge[key]) && key in merge) output[key] = merge[key]
+			else if (Array.isArray(merge[key])) output[key] = merge[key]
 			else output[key] = object[key]
 		})
 
