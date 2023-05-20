@@ -149,6 +149,11 @@ esbuild@^0.17.2:
   version "0.0.0"
   uid ""
 
+ts-arithmetic@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ts-arithmetic/-/ts-arithmetic-0.1.1.tgz#d99bc2b5c68ec00f5226ec93ff679af644cf78e0"
+  integrity sha512-3VqgsRgzaYfj+zKWn+7O66ifHwbOOnT2BoOrHwdEUBz7az0DetoZOS20+juNJh1klgzvWEi2Qxden41pomOUAQ==
+
 typescript@^5.0.0:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"

@@ -19,7 +19,7 @@
 
 ```sh
 # NPM
-npm i rjutils-collection
+npm install rjutils-collection
 
 # Yarn
 yarn add rjutils-collection

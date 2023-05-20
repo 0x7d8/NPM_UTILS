@@ -8,6 +8,9 @@ import encryptStrOptions from "./types/encryptStrOptions"
 import decryptStrOptions from "./types/decryptStrOptions"
 import hashStrOptions from "./types/hashStrOptions"
 
+export { default as size } from "./functions/size"
+export { default as time } from "./functions/time"
+
 import * as randomString from "./utils/randomString"
 import * as cryptString from "./utils/cryptString"
 
