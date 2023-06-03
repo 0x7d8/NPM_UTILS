@@ -79,7 +79,7 @@ class Time<Amount extends number> {
 }
 
 /**
- * Utility for defining bytes
+ * Utility for defining milliseconds
  * @example
  * ```
  * time(10).h() // 36000000
