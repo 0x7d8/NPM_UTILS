@@ -1,4 +1,4 @@
-import * as crypto from "crypto"
+import crypto from "crypto"
 
 import encryptStrOptions from "../types/encryptStrOptions"
 import decryptStrOptions from "../types/decryptStrOptions"

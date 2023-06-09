@@ -34,7 +34,7 @@ export type DeepRequired<Type> = Type extends {}
 		: Required<Type>
 	: Required<Type>
 
-export {
+export type {
 	randomStrOptions,
 	encryptStrOptions,
 	decryptStrOptions,
