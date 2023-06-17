@@ -1,5 +1,5 @@
-import * as path from "path"
-import * as fs from "fs"
+import path from "path"
+import fs from "fs"
 
 import { Hash } from "crypto"
 
@@ -45,8 +45,8 @@ export type {
 /**
  * Load an Env File as Object
  * @since 1.0.0
-*/ export function loadEnv<File extends string, Async extends boolean | undefined>(
-	/** The path to the Env file */ file: File,
+*/ export function loadEnv<Async extends boolean | undefined>(
+	/** The path to the Env file */ file: string,
 	/** Whether to load the File Async */ isAsync?: Async
 ): Async extends true ? Promise<Record<string, string>> : Record<string, string> {
 	if (typeof file !== 'string') throw new TypeError('filePath must be a string')
@@ -119,6 +119,30 @@ export type {
 	})
 
 	return string
+}
+
+/**
+ * Generate a Random Code
+ * 
+ * When `symbols` is enabled, generated `-` will be replaced with `.`
+ * @example
+ * ```
+ * randomCode([1, 2]) // O-kN
+ * randomCode([6, 7]) // QyzKcJ-vUveJHR
+ * randomCode([3, 4], { symbols: true }) // ~?&-LDbe
+ * ```
+ * @since 1.6.0
+*/ export function randomCode(segments: number[], options: Omit<randomStrOptions, 'length'> = {}): string {
+	if (!Array.isArray(segments)) throw new TypeError('segments must be an array')
+	if (typeof options !== 'object') throw new TypeError('options must be an object')
+
+	let result = ''
+	for (let i = 0; i < segments.length; i++) {
+		result += randomStr({ ...options, length: segments[i] }).replace(/-/g, '.')
+		if (i !== segments.length - 1) result += '-'
+	}
+
+	return result
 }
 
 /**

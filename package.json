@@ -1,6 +1,6 @@
 {
   "name": "rjutils-collection",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Easy and Lightweight Utilities",
   "module": "lib/esm/index.js",
   "main": "lib/cjs/index.js",
