@@ -1,6 +1,6 @@
 {
   "name": "rjutils-collection",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Easy and Lightweight Utilities",
   "module": "lib/esm/index.js",
   "main": "lib/cjs/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rotvproHD/NPM_UTILS.git"
+    "url": "git+https://github.com/0x7d8/NPM_UTILS.git"
   },
   "keywords": [
     "easy",
@@ -28,16 +28,17 @@
   "author": "0x4096 (Robert Jansen)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rotvproHD/NPM_UTILS/issues"
+    "url": "https://github.com/0x7d8/NPM_UTILS/issues"
   },
-  "homepage": "https://github.com/rotvproHD/NPM_UTILS#readme",
+  "homepage": "https://github.com/0x7d8/NPM_UTILS#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
     "esbuild": "^0.17.2",
     "rjutils-collection": "link:.",
-    "typescript": "^5.0.0"
+    "typescript": "^5.1.0"
   },
   "dependencies": {
-    "ts-arithmetic": "^0.1.1"
+    "ts-arithmetic": "^0.1.1",
+    "zod": "^3.21.4"
   }
 }

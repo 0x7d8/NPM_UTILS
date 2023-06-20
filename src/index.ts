@@ -11,6 +11,8 @@ import hashStrOptions from "./types/hashStrOptions"
 export { default as size } from "./functions/size"
 export { default as time } from "./functions/time"
 
+export { zType, zValidate } from "./utils/zodDecorators"
+
 import * as randomString from "./utils/randomString"
 import * as cryptString from "./utils/cryptString"
 
@@ -71,6 +73,22 @@ export type {
 		}
 	}) as any
 	else return parseContent(fs.readFileSync(resolvedFile, 'utf8')) as any
+}
+
+/**
+ * Cast a Value as something else (ts only)
+ * @warning THIS DOES NOT DO ANY VALIDATION!! USE WITH CARE.
+ * @example
+ * ```
+ * const descriptor: PropertyDescriptor = ...
+ * 
+ * as<number[]>(descriptor.value).push(2)
+ * ```
+ * @since 1.7.0
+*/ export function as<T>(
+	/** The Object to cast the type to */ object: any
+): T {
+	return object
 }
 
 /**
