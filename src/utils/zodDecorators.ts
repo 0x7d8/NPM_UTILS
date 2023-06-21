@@ -58,9 +58,18 @@ type DescriptorMetaItem = {
  *     return num.toString(16)
  *   }
  * }
+ * 
+ * // or
+ * 
+ * class MyClass {
+ *   ‍@zValidate([ (z) => z.number() ])
+ *   public getAsHex(‍num: number): string {
+ *     return num.toString(16)
+ *   }
+ * }
  * ```
  * @since 1.7.0
-*/ export function zValidate() {
+*/ export function zValidate(validations: (z.ZodType | ((z: Zod['z']) => z.ZodType))[] = []) {
 	return function <This, Args extends any[], Return>(
 		target: (this: This, ...args: Args) => Return,
 		context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
@@ -69,10 +78,10 @@ type DescriptorMetaItem = {
 		as<PropertyDescriptor>(arguments[2]).value = function (...args: any[]) {
 			const finalArgs: any[] = []
 
-			const zTypes = as<DescriptorMetaItem[]>(Object.getOwnPropertyDescriptor(target, zodValidateSymbol)?.value).reverse()
+			const zTypes = as<DescriptorMetaItem[]>(Object.getOwnPropertyDescriptor(target, zodValidateSymbol)?.value?.reverse() ?? validations.map((v, i) => ({ param: i, type: typeof v === 'function' ? v(z) : v })))
 			for (let i = 0; i < zTypes.length; i++) {
 				const infos = zTypes[i].type.safeParse(args[zTypes[i].param])
-				if (!infos.success) throw new Error(`${context}(${'!, '.repeat(i)}X${', ?'.repeat(zTypes.length - 1 - i)}) |  ${infos.error.errors[0].message}`)
+				if (!infos.success) throw new Error(`${context}(${'X, '.repeat(i)}!${', x'.repeat(zTypes.length - 1 - i)}) |  ${infos.error.errors[0].message}`)
 				else finalArgs.push(infos.data)
 			}
 
