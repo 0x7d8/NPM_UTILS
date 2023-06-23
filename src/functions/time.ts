@@ -30,7 +30,7 @@ class Time<Amount extends number> {
 	 * ```
 	 * @since 1.5.0
 	*/ public s(): Multiply<Amount, 1000> {
-		return this.amount / 1000 as never
+		return this.amount * 1000 as never
 	}
 
 	/**
