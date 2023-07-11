@@ -10,6 +10,7 @@ import hashStrOptions from "./types/hashStrOptions"
 
 export { default as size } from "./functions/size"
 export { default as time } from "./functions/time"
+export { default as from } from "./functions/from"
 
 export { zType, zValidate } from "./utils/zodDecorators"
 
